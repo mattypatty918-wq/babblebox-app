@@ -27,6 +27,8 @@ jobs:
         run: |
           cd ios/App
           xcodebuild -project App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath App.xcarchive build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          echo '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>method</key><string>ad-hoc</string></dict></plist>' > export.plist
+          xcodebuild -exportArchive -archivePath App.xcarchive -exportPath build -exportOptionsPlist export.plist CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
