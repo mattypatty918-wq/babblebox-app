@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.speakeasyapp.translator',
-  appName: 'SpeakEasy',
+  appId: 'com.babblebox.translator',
+  appName: 'BabbleBox',
   webDir: 'dist',
   server: {
     androidScheme: 'https',
