@@ -16,7 +16,7 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm ci && npx cap add ios
       - name: Build web app
         run: npm run build
       - name: Sync Capacitor
