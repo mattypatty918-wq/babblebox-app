@@ -20,7 +20,9 @@ jobs:
       - name: Build web app
         run: npm run build
       - name: Sync Capacitor
-        run: npx cap sync ios
+        run: |
+          npx cap sync ios
+          ls ios/App/*.xcodeproj
       - name: Build iOS
         run: |
           cd ios/App
