@@ -45,11 +45,6 @@ jobs:
       - name: Upload to App Store Connect
         run: |
           cd ios/App/build
-          echo "${{ secrets.APPSTORECONNECT_API_KEY }}" | base64 -d > AuthKey.p8
-          ls -la AuthKey.p8
-          xcrun altool --upload-app -t ios -f App.ipa \
-            --apiKey "${{ secrets.APPSTORECONNECT_API_KEY_ID }}" \
-            --apiIssuer "${{ secrets.APPSTORECONNECT_API_KEY_ISSUER_ID }}" \
-            --type ios --uploadTimeout 600 2>&1 | tail -30
+          xcrun altool --upload-app -f App.ipa -t ios --apiKey "${{ secrets.APPSTORECONNECT_API_KEY_ID }}" --apiIssuer "${{ secrets.APPSTORECONNECT_API_KEY_ISSUER_ID }}" --uploadTimeout 600 2>&1 | tail -40
         env:
           API_KEY_FILE: ${{ secrets.APPSTORECONNECT_API_KEY_FILE }}
