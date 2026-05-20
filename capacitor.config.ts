@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.babblebox.translator',
-  appName: 'BabbleBox',
+  appId: 'com.mattypattysapps.translateomatic',
+  appName: 'Translateomatic',
   webDir: 'dist',
   server: {
     androidScheme: 'https',

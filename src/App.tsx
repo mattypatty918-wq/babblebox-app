@@ -81,7 +81,7 @@ function HomePage({ onNavigate, onUpgrade, isPro }: { onNavigate: (p: Page) => v
     <div className="p-6">
       <div className="text-center mb-8">
         <div className="text-5xl mb-3">🌐</div>
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Translate Now</h1>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Translateomatic</h1>
         <p className="text-slate-400 mt-2">Break language barriers everywhere</p>
       </div>
 
@@ -350,7 +350,7 @@ function PricingPage({ onBack, onSelectPlan }: { onBack: () => void; onSelectPla
   return (
     <div className="p-6">
       <button onClick={onBack} className="text-purple-400 mb-4">← Back</button>
-      <h2 className="text-2xl font-bold text-center mb-6">💎 Translate Now Pro</h2>
+      <h2 className="text-2xl font-bold text-center mb-6">💎 Translateomatic Pro</h2>
       <div className="space-y-4">
         <div className="bg-slate-800 rounded-2xl p-6 border border-purple-500">
           <div className="text-sm text-purple-400">Monthly</div>
