@@ -1,0 +1,92 @@
+# Codemagic CI/CD for Translateomatic (Translate Now)
+# App: https://github.com/mattypatty918-wq/babblebox-app
+
+workflows:
+  ios-build:
+    name: iOS Build
+    max_build_duration: 60
+    environment:
+      vars:
+        APP_ID: "com.mattypattysapps.translateomatic"
+        APP_NAME: "Translateomatic"
+        SCHEME: "App"
+        XCODE_WORKSPACE: "App/App.xcworkspace"
+        XCODE_PROJECT: "App/App.xcodeproj"
+        APPLE_TEAM_ID: "3B3YQ4328X"
+      node: v18
+    triggering:
+      events:
+        - push
+        - tag
+      branch_patterns:
+        - pattern: main
+          include: true
+    scripts:
+      - name: Install npm dependencies
+        command: |
+          npm install
+          npm install @capacitor/core @capacitor/cli
+      - name: Sync Capacitor
+        command: |
+          npx cap sync ios
+      - name: Set Xcode version
+        command: |
+          sudo xcode-select -s /Applications/Xcode_16.app
+      - name: Build iOS
+        script: |
+          xcodebuild -workspace App/App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -archivePath build/Translateomatic.xcarchive \
+            archive
+          xcodebuild -exportArchive \
+            -archivePath build/Translateomatic.xcarchive \
+            -exportPath build \
+            -exportOptionsPlist App/ExportOptions.plist
+    artifacts:
+      - build/*.ipa
+      - build/*.xcarchive
+    publishing:
+      app_store_connect:
+        apple_id: ${{ secrets.APPLE_ID }}
+        password: ${{ secrets.APPLE_APP_PASSWORD }}
+        team_id: ${{ secrets.APPLE_TEAM_ID }}
+      email:
+        recipients:
+          - mattypatty918@gmail.com
+        notify:
+          success: true
+          failure: true
+
+  android-build:
+    name: Android Build
+    max_build_duration: 60
+    environment:
+      vars:
+        APP_ID: "com.mattypattysapps.translateomatic"
+      node: v18
+      java: java17
+    triggering:
+      events:
+        - push
+        - tag
+      branch_patterns:
+        - pattern: main
+          include: true
+    scripts:
+      - name: Install dependencies
+        command: |
+          npm install
+          npm install @capacitor/core @capacitor/cli
+      - name: Sync Capacitor
+        command: |
+          npx cap sync android
+      - name: Build Android
+        command: |
+          cd android && ./gradlew assembleRelease
+    artifacts:
+      - android/app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - mattypatty918@gmail.com
